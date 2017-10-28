@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ee.klambrike.coloredprogressbar.DemoActivity"
+    android:padding="@dimen/padding_10"
+    android:background="@color/purple"
+    >
+
+    <ee.klambrike.library.ColoredProgress
+        android:id="@+id/colored_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
+
+    <Button
+        android:id="@+id/btnAnimate1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="animate 1"
+        />
+
+    <Button
+        android:id="@+id/btnPopulate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="populate"
+        android:layout_alignParentRight="true"
+        />
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
