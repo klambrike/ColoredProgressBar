@@ -84,7 +84,7 @@ public class ColoredProgress extends RelativeLayout {
         return value;
     }
 
-    public void animate1() {
+    public void toggleElementsToFillBar() {
         float from = progressElementsContainer.getScaleX() > 1.01f ? progressElementsContainer.getScaleX() : 1f;
         float to = progressElementsContainer.getScaleX() > 1.01f ? 1f : (float)rootView.getWidth()/(float)childrenWidth;
         animateWidth(from, to);

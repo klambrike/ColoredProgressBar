@@ -23,7 +23,7 @@ public class DemoActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                coloredProgress.animate1();
+                coloredProgress.toggleElementsToFillBar();
             }
         });
 
