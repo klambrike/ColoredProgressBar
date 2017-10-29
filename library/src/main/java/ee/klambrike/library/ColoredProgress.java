@@ -62,6 +62,7 @@ public class ColoredProgress extends RelativeLayout {
 
     public void addProgressElement(ProgressElement element) {
         View progressElement= getProgressElementView(element);
+        progressElement.setTranslationX(rootView.getWidth());
         progressElementsContainer.addView(progressElement);
 
         animateWithSpring(progressElement);
@@ -91,7 +92,6 @@ public class ColoredProgress extends RelativeLayout {
     }
 
     private void animateWithSpring(View targetView) {
-        targetView.setTranslationX(rootView.getWidth());
         SpringAnimation springX = new SpringAnimation(targetView,
                 new FloatPropertyCompat<View>("translationX") {
 
