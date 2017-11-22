@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 26
@@ -32,4 +33,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.android.support:support-dynamic-animation:26.1.0'
+}
+
+publish {
+    repoName = bintray.repoName
+    artifactId = bintray.artifactId
+    userOrg = bintray.userOrg
+    groupId = bintray.groupId
+    uploadName = bintray.uploadName
+    publishVersion = bintray.publishVersion
 }
