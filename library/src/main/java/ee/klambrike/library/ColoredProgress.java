@@ -16,6 +16,7 @@ import android.view.animation.BounceInterpolator;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ColoredProgress extends RelativeLayout {
@@ -24,7 +25,7 @@ public class ColoredProgress extends RelativeLayout {
     private LinearLayout progressElementsContainer;
     private int max = 100;
     private int childrenWidth = 0;
-    private List<ProgressElement> elementsList;
+    private List<ProgressElement> elementsList = new ArrayList<>();
     private int animationDuration = 1200;
 
     public ColoredProgress(Context context) {
@@ -61,6 +62,7 @@ public class ColoredProgress extends RelativeLayout {
     }
 
     public void addProgressElement(ProgressElement element) {
+        elementsList.add(element);
         View progressElement= getProgressElementView(element);
         progressElement.setTranslationX(rootView.getWidth());
         progressElementsContainer.addView(progressElement);
