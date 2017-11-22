@@ -10,4 +10,5 @@
     <color name="pink">#f65f90</color>
     <color name="purple">#6c42c1</color>
     <color name="purple_dark">#5a31ac</color>
+    <color name="greyscale_progress">#ffffff</color>
 </resources>

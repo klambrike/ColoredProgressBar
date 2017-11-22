@@ -2,6 +2,18 @@
 
 ![Populating bar and animating width](https://raw.github.com/klambrike/ColoredProgressBar/master/reference/colored_progress_bar_demo.gif "Populating bar and animating width")
 
+## Installation
+Add dependency to build.gradle:
+
+```xml
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'ee.klambrike:colored-progress-bar:1.1.0'
+}
+```  
 ## Usage
 Add element to layout:
 

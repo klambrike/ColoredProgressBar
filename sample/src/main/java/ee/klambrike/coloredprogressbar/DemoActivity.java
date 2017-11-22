@@ -1,6 +1,5 @@
 package ee.klambrike.coloredprogressbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +10,8 @@ import ee.klambrike.library.ColoredProgress;
 import ee.klambrike.library.ProgressElement;
 
 public class DemoActivity extends AppCompatActivity {
+    private boolean isGreyScale = false;
+    private int max = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +20,20 @@ public class DemoActivity extends AppCompatActivity {
 
         final ColoredProgress coloredProgress = findViewById(R.id.colored_progress);
 
-        Button button1 = findViewById(R.id.btnAnimate1);
-        button1.setOnClickListener(new View.OnClickListener() {
+        Button btnAnimate = findViewById(R.id.btnAnimate1);
+        btnAnimate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 coloredProgress.toggleElementsToFillBar();
+            }
+        });
+
+        Button btnToggleGreyScale = findViewById(R.id.btnToggleGreyScale);
+        btnToggleGreyScale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isGreyScale = !isGreyScale;
+                coloredProgress.setProgressGreyScale(isGreyScale);
             }
         });
 
@@ -50,10 +60,7 @@ public class DemoActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = getBaseContext().getPackageManager()
-                        .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+                coloredProgress.clearProgress();
             }
         });
     }

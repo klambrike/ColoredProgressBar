@@ -8,6 +8,7 @@ import android.os.Build;
 import android.support.animation.FloatPropertyCompat;
 import android.support.animation.SpringAnimation;
 import android.support.animation.SpringForce;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ public class ColoredProgress extends RelativeLayout {
     private int childrenWidth = 0;
     private List<ProgressElement> elementsList = new ArrayList<>();
     private int animationDuration = 1200;
+    private int greyScaleColor;
 
     public ColoredProgress(Context context) {
         super(context);
@@ -59,6 +61,8 @@ public class ColoredProgress extends RelativeLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             progressContainer.setClipToOutline(true);
         }
+
+        greyScaleColor = ContextCompat.getColor(context, R.color.greyscale_progress);
     }
 
     public void addProgressElement(ProgressElement element) {
@@ -73,7 +77,6 @@ public class ColoredProgress extends RelativeLayout {
     private View getProgressElementView(ProgressElement element) {
         View view = new View(getContext());
         final int elementWidth = getProgressElementWidth(element.getAmount());
-        childrenWidth += elementWidth;
         LinearLayout.LayoutParams layoutParams =
                 new LinearLayout.LayoutParams(elementWidth,
                         getResources().getDimensionPixelSize(R.dimen.progress_height));
@@ -84,6 +87,7 @@ public class ColoredProgress extends RelativeLayout {
 
     private int getProgressElementWidth(int elementAmount) {
         int value = (elementAmount * rootView.getWidth()) / max;
+        childrenWidth += value;
         return value;
     }
 
@@ -163,6 +167,7 @@ public class ColoredProgress extends RelativeLayout {
         if(max != this.max && max > 0) {
             this.max = max;
             if(progressElementsContainer != null && progressElementsContainer.getChildCount() > 0) {
+                childrenWidth = 0;
                 for(int i = 0; i < progressElementsContainer.getChildCount(); i++) {
                     int width = getProgressElementWidth(elementsList.get(i).getAmount());
                     View child = progressElementsContainer.getChildAt(i);
@@ -171,6 +176,27 @@ public class ColoredProgress extends RelativeLayout {
                     child.setLayoutParams(childParams);
                 }
             }
+        }
+    }
+
+    public void setProgressGreyScale(boolean isGreyScale) {
+        if(progressElementsContainer != null && progressElementsContainer.getChildCount() > 0) {
+            for(int i = 0; i < progressElementsContainer.getChildCount(); i++) {
+                View child = progressElementsContainer.getChildAt(i);
+                child.setBackgroundColor(isGreyScale ? greyScaleColor : getElementColor(i));
+            }
+        }
+    }
+
+    private int getElementColor(int childElementIndex) {
+        return elementsList.get(childElementIndex).getColor();
+    }
+
+    public void clearProgress() {
+        if(progressElementsContainer != null) {
+            childrenWidth = 0;
+            elementsList = new ArrayList<ProgressElement>();
+            progressElementsContainer.removeAllViewsInLayout();
         }
     }
 }
