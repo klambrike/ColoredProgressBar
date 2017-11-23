@@ -29,6 +29,7 @@ public class ColoredProgress extends RelativeLayout {
     private List<ProgressElement> elementsList = new ArrayList<>();
     private int animationDuration = 1200;
     private int greyScaleColor;
+    private boolean isGreyScale;
 
     public ColoredProgress(Context context) {
         super(context);
@@ -66,12 +67,20 @@ public class ColoredProgress extends RelativeLayout {
     }
 
     public void addProgressElement(ProgressElement element) {
+        addProgressElement(element, true);
+    }
+
+    public void addProgressElement(ProgressElement element, boolean animate) {
         elementsList.add(element);
         View progressElement= getProgressElementView(element);
-        progressElement.setTranslationX(rootView.getWidth());
+        if(animate) {
+            progressElement.setTranslationX(rootView.getWidth());
+        }
         progressElementsContainer.addView(progressElement);
 
-        animateWithSpring(progressElement);
+        if(animate) {
+            animateWithSpring(progressElement);
+        }
     }
 
     private View getProgressElementView(ProgressElement element) {
@@ -81,7 +90,7 @@ public class ColoredProgress extends RelativeLayout {
                 new LinearLayout.LayoutParams(elementWidth,
                         getResources().getDimensionPixelSize(R.dimen.progress_height));
         view.setLayoutParams(layoutParams);
-        view.setBackgroundColor(element.getColor());
+        view.setBackgroundColor(isGreyScale ? greyScaleColor : element.getColor());
         return view;
     }
 
@@ -180,6 +189,7 @@ public class ColoredProgress extends RelativeLayout {
     }
 
     public void setProgressGreyScale(boolean isGreyScale) {
+        this.isGreyScale = isGreyScale;
         if(progressElementsContainer != null && progressElementsContainer.getChildCount() > 0) {
             for(int i = 0; i < progressElementsContainer.getChildCount(); i++) {
                 View child = progressElementsContainer.getChildAt(i);
@@ -198,5 +208,13 @@ public class ColoredProgress extends RelativeLayout {
             elementsList = new ArrayList<ProgressElement>();
             progressElementsContainer.removeAllViewsInLayout();
         }
+    }
+
+    public int getGreyScaleColor() {
+        return greyScaleColor;
+    }
+
+    public void setGreyScaleColor(int greyScaleColor) {
+        this.greyScaleColor = greyScaleColor;
     }
 }
