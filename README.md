@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'ee.klambrike:colored-progress-bar:1.1.1'
+    implementation 'ee.klambrike:colored-progress-bar:1.2'
 }
 ```  
 ## Usage

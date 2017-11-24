@@ -106,6 +106,13 @@ public class ColoredProgress extends RelativeLayout {
         animateWidth(from, to);
     }
 
+    public void setElementsShouldFillBar(boolean isShouldFill) {
+        boolean isCurrentlyFilled = progressElementsContainer.getScaleX() > 1.01f;
+        if(isCurrentlyFilled && isShouldFill || !isCurrentlyFilled && !isShouldFill) {
+            toggleElementsToFillBar();
+        }
+    }
+
     private void animateWithSpring(View targetView) {
         SpringAnimation springX = new SpringAnimation(targetView,
                 new FloatPropertyCompat<View>("translationX") {
