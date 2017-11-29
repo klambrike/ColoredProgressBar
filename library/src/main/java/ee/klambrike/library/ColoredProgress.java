@@ -108,7 +108,7 @@ public class ColoredProgress extends RelativeLayout {
 
     public void setElementsShouldFillBar(boolean isShouldFill) {
         boolean isCurrentlyFilled = progressElementsContainer.getScaleX() > 1.01f;
-        if(isCurrentlyFilled && isShouldFill || !isCurrentlyFilled && !isShouldFill) {
+        if(isCurrentlyFilled != isShouldFill) {
             toggleElementsToFillBar();
         }
     }
